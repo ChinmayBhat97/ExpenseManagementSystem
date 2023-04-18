@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ExpenseManagementSystem.Models.PersonalClaim>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 style="padding-left:250px">
+    Claims Page
+</h3>
+<p style="padding-left:250px">
+    <a asp-action="AddClaim">Create New</a>
+</p>
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.claimantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.claimantEmailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.managerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.managerEmailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.accuntNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IFSC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.billingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.claimingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageFile)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.claimantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.claimantEmailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.managerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.managerEmailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.accuntNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IFSC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.billingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.claimingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageFile)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.claimID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

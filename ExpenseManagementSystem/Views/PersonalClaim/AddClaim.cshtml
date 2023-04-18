@@ -1,0 +1,149 @@
+﻿@model ExpenseManagementSystem.Models.PersonalClaim
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4 style="padding-left:250px">PersonalClaim</h4>
+
+<div class="row" style="padding-left:250px;padding-top:25px">
+    <div class="col-md-12">
+        <form asp-action="AddClaim">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="claimantName" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="claimantName" class="form-control" />
+                        <span asp-validation-for="claimantName" class="text-danger"></span>
+                    </div>
+                  </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="claimantEmailID" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="claimantEmailID" class="form-control" />
+                        <span asp-validation-for="claimantEmailID" class="text-danger"></span>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="managerName" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="managerName" class="form-control" />
+                        <span asp-validation-for="managerName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="managerEmailID" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="managerEmailID" class="form-control" />
+                        <span asp-validation-for="managerEmailID" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="accuntNumber" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="accuntNumber" class="form-control" />
+                        <span asp-validation-for="accuntNumber" class="text-danger"></span>
+                    </div>
+                    </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="IFSC" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="IFSC" class="form-control" />
+                        <span asp-validation-for="IFSC" class="text-danger"></span>
+                    </div>
+                </div>
+           </div>           
+           
+          
+            <div class="row">
+                <div class ="col-md-10">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="description" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        
+                        <input asp-for="description" class="form-control" />
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b> <label asp-for="billingDate" class="control-label"></label><span style="color:red;">*</span></b>
+                        <input asp-for="billingDate" class="form-control" />
+                        <span asp-validation-for="billingDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b> <label asp-for="DeptID" class="control-label"></label><span style="color:red;">*</span> </b>
+                        <select asp-for="DeptID" class="form-control" id="roles">
+                            <option value=""> - -Select - - </option>
+                            <option value="1">Admin</option>
+                            <option value="2">User</option>
+                        </select>
+                        <span asp-validation-for="DeptID" class="text-danger">  </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    @* <div class="form-group">
+                    <label asp-for="claimingDate" class="control-label"></label>
+                    <input asp-for="claimingDate" class="form-control" />
+                    <span asp-validation-for="claimingDate" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="ImageFile" class="control-label"></label><span style="color:red;">*</span> </b>
+                        <input asp-for="ImageFile" class="form-control" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <br />
+          
+          
+            <div class="form-group" style="padding-left:250px">
+                <a asp-action="ClaimPage">Back to List</a>
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div style ="padding-left:250px">
+    <a asp-action="ClaimPage">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

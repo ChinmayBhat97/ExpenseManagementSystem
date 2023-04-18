@@ -1,0 +1,84 @@
+﻿@model ExpenseManagementSystem.Models.PersonalClaim
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PersonalClaim</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="claimID" />
+            <div class="form-group">
+                <label asp-for="claimantName" class="control-label"></label>
+                <input asp-for="claimantName" class="form-control" />
+                <span asp-validation-for="claimantName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="claimantEmailID" class="control-label"></label>
+                <input asp-for="claimantEmailID" class="form-control" />
+                <span asp-validation-for="claimantEmailID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptID" class="control-label"></label>
+                <select asp-for="DeptID" class="form-control" asp-items="ViewBag.DeptID"></select>
+                <span asp-validation-for="DeptID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="managerName" class="control-label"></label>
+                <input asp-for="managerName" class="form-control" />
+                <span asp-validation-for="managerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="managerEmailID" class="control-label"></label>
+                <input asp-for="managerEmailID" class="form-control" />
+                <span asp-validation-for="managerEmailID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="accuntNumber" class="control-label"></label>
+                <input asp-for="accuntNumber" class="form-control" />
+                <span asp-validation-for="accuntNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IFSC" class="control-label"></label>
+                <input asp-for="IFSC" class="form-control" />
+                <span asp-validation-for="IFSC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="billingDate" class="control-label"></label>
+                <input asp-for="billingDate" class="form-control" />
+                <span asp-validation-for="billingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="claimingDate" class="control-label"></label>
+                <input asp-for="claimingDate" class="form-control" />
+                <span asp-validation-for="claimingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
