@@ -8,8 +8,8 @@
 <h4 style="padding-left:250px">PersonalClaim</h4>
 
 <div class="row" style="padding-left:250px;padding-top:25px">
-    <div class="col-md-12">
-        <form asp-action="AddClaim">
+    <div class="col-md-12"> 
+        <form asp-action="AddClaim" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="row">
@@ -33,7 +33,7 @@
                     </div>
                 </div>    
             </div>
-
+           
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group">
@@ -55,50 +55,13 @@
                     </div>
                 </div>
             </div>
-
            
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <b>
-                            <label asp-for="accuntNumber" class="control-label"></label><span style="color:red;">*</span>
-                        </b>
-                        <input asp-for="accuntNumber" class="form-control" />
-                        <span asp-validation-for="accuntNumber" class="text-danger"></span>
-                    </div>
-                    </div>
-
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <b>
-                            <label asp-for="IFSC" class="control-label"></label><span style="color:red;">*</span>
-                        </b>
-                        <input asp-for="IFSC" class="form-control" />
-                        <span asp-validation-for="IFSC" class="text-danger"></span>
-                    </div>
-                </div>
-           </div>           
-           
-          
-            <div class="row">
-                <div class ="col-md-10">
-                    <div class="form-group">
-                        <b>
-                            <label asp-for="description" class="control-label"></label><span style="color:red;">*</span>
-                        </b>
-                        
-                        <input asp-for="description" class="form-control" />
-                        <span asp-validation-for="description" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
 
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
                         <b> <label asp-for="billingDate" class="control-label"></label><span style="color:red;">*</span></b>
-                        <input asp-for="billingDate" class="form-control" />
+                        <input asp-for="billingDate" type="date" class="form-control" />
                         <span asp-validation-for="billingDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -108,14 +71,18 @@
                         <b> <label asp-for="DeptID" class="control-label"></label><span style="color:red;">*</span> </b>
                         <select asp-for="DeptID" class="form-control" id="roles">
                             <option value=""> - -Select - - </option>
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
+                            <option value="1">Accounts</option>
+                            <option value="2">Financial Services</option>
+                            <option value="3">Enablement Services</option>
+                            <option value="4">Human Resources</option>
+                            <option value="5">Software Services</option>
+
                         </select>
                         <span asp-validation-for="DeptID" class="text-danger">  </span>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     @* <div class="form-group">
                     <label asp-for="claimingDate" class="control-label"></label>
                     <input asp-for="claimingDate" class="form-control" />
@@ -123,14 +90,68 @@
                     </div>*@
                     <div class="form-group">
                         <b>
-                            <label asp-for="ImageFile" class="control-label"></label><span style="color:red;">*</span> </b>
-                        <input asp-for="ImageFile" class="form-control" />
+                            <label asp-for="ImageFile" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="ImageFile" accept="image/*" />
                         <span asp-validation-for="ImageFile" class="text-danger"></span>
                     </div>
                 </div>
             </div>
+         
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="accuntNumber" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="accuntNumber" class="form-control" />
+                        <span asp-validation-for="accuntNumber" class="text-danger"></span>
+                    </div>
+                    </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="IFSC" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="IFSC" class="form-control" />
+                        <span asp-validation-for="IFSC" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    
+                    <div class="form-group">
+                            <b>
+                                <label asp-for="claimAmount" class="control-label"></label><span style="color:red;">*</span>
+                            </b>
+                        <div class="currency-wrap">
+                            <input asp-for="claimAmount" class="form-control" />
+                            <span class="currency-code"> <i class="fa fa-inr" aria-hidden="true" style="top:10px"></i> </span>
+                        </div>   
+                        <span asp-validation-for="claimAmount" class="text-danger"></span>
+                    </div>
+                </div>
+           </div>
+
+
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="description" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+
+                        <input asp-for="description" class="form-control" />
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
             <br />
           
+             
           
             <div class="form-group" style="padding-left:250px">
                 <a asp-action="ClaimPage">Back to List</a>

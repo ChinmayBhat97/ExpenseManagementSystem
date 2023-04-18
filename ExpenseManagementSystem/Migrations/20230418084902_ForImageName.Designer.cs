@@ -4,6 +4,7 @@ using ExpenseManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230418084902_ForImageName")]
+    partial class ForImageName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,36 +135,44 @@ namespace ExpenseManagementSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IFSC")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageFile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("accuntNumber")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<long>("accuntNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("billingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("claimAmount")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("claimantEmailID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("claimantName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("claimingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("managerEmailID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("managerName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("stusID")

@@ -4,6 +4,7 @@ using ExpenseManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230418114107_initforLong")]
+    partial class initforLong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,9 +145,6 @@ namespace ExpenseManagementSystem.Migrations
 
                     b.Property<DateTime>("billingDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<long>("claimAmount")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("claimantEmailID")
                         .HasColumnType("nvarchar(max)");

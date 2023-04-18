@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ExpenseManagementSystem.Models.PersonalClaim>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 style="padding-left:250px">
+    Claims List
+</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.claimID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.claimantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.claimantEmailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.billingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.claimingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stusID)
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.ImageFile)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.claimID)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.claimantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.claimantEmailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptID)
+            </td>
+            
+            <td>
+                    @Html.DisplayFor(modelItem => item.billingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.claimingDate)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stusID)
+                </td>
+            
+           @* <td>
+                <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.claimID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="form-group" style="padding-left:250px">
+    <a asp-action="ClaimPage">Back to List</a>
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div>
