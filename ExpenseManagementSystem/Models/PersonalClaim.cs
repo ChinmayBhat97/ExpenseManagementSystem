@@ -18,7 +18,7 @@ namespace ExpenseManagementSystem.Models
         [DisplayName("Department")]
         public virtual int DeptID { get; set; }
         [ForeignKey("DeptID")]
-        public virtual Department? Department { get; set; }
+        public virtual Department Department { get; set; }
         [DisplayName("Manager Name")]
         public string? managerName { get; set; }
         [DisplayName("Manager Email-ID")]
@@ -31,8 +31,9 @@ namespace ExpenseManagementSystem.Models
         [DisplayName("Claim Description")]
         public string? description { get; set; }
         [DisplayName("Billing Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime billingDate { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime claimingDate { get; set; }
 
 

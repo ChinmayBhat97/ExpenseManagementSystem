@@ -74,7 +74,7 @@ namespace ExpenseManagementSystem.Controllers
                 }
 
                 personalClaim.stusID=1;
-                personalClaim.claimingDate=DateTime.Now;
+                personalClaim.claimingDate=DateTime.Now.Date;
 
                 _context.Add(personalClaim);
                 await _context.SaveChangesAsync();
@@ -98,6 +98,8 @@ namespace ExpenseManagementSystem.Controllers
             try
             {
                 var ListofClaims = await _context.PersonalClaims.ToListAsync();
+               //var ListofClaims = await _context.PersonalClaims.FromSqlRaw("_SP_forClaimList").ToListAsync();
+                 
                 return View(ListofClaims);
             }
             catch (Exception ex)

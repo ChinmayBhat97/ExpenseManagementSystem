@@ -7,6 +7,6 @@ namespace ExpenseManagementSystem.Models
         [Key]
         public int Id { get; set; }
 
-        public string Status { get; set; }
+        public string claimStatus { get; set; }
     }
 }

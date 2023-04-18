@@ -69,15 +69,16 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <b> <label asp-for="DeptID" class="control-label"></label><span style="color:red;">*</span> </b>
-                        <select asp-for="DeptID" class="form-control" id="roles">
+                        <select asp-for="DeptID" class="form-control" >
                             <option value=""> - -Select - - </option>
                             <option value="1">Accounts</option>
                             <option value="2">Financial Services</option>
                             <option value="3">Enablement Services</option>
                             <option value="4">Human Resources</option>
                             <option value="5">Software Services</option>
-
                         </select>
+                       @* <select id="Select1" asp-items="@(new SelectList(Model.Department,"Id","departmentName"))"> </select>*@
+
                         <span asp-validation-for="DeptID" class="text-danger">  </span>
                     </div>
                 </div>

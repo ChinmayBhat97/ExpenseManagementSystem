@@ -8,7 +8,7 @@
     Claims List
 </h3>
 
-<table class="table">
+<table class="table" style="padding-left:350px">
     <thead>
         <tr>
             <th>
@@ -20,13 +20,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.claimantEmailID)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Department)
-            </th>
+          @*  <th>
+                @Html.DisplayNameFor(model => model.DeptID)
+            </th>*@
             
-            <th>
+          @*  <th>
                 @Html.DisplayNameFor(model => model.billingDate)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.claimingDate)
             </th>
@@ -51,13 +51,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.claimantEmailID)
             </td>
-            <td>
+           @* <td>
                 @Html.DisplayFor(modelItem => item.DeptID)
-            </td>
+            </td>*@
             
-            <td>
-                    @Html.DisplayFor(modelItem => item.billingDate)
-            </td>
+          @*  <td>
+                @Html.DisplayFor(modelItem => item.billingDate)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.claimingDate)
             </td>
@@ -65,11 +65,7 @@
                     @Html.DisplayFor(modelItem => item.stusID)
                 </td>
             
-           @* <td>
-                <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.claimID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>
-            </td>*@
+           
         </tr>
 }
     </tbody>
