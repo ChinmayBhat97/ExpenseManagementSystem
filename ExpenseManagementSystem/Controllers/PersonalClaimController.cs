@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using ExpenseManagementSystem.Data;
 using ExpenseManagementSystem.Models;
 using System.Text.Unicode;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace ExpenseManagementSystem.Controllers
 {
+    
     public class PersonalClaimController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +25,7 @@ namespace ExpenseManagementSystem.Controllers
             _context = context;
             _hostEnvironment=hostEnvironment;
         }
-
+       
         // GET: PersonalClaim
         public async Task<IActionResult> ClaimPage()
         {
@@ -38,8 +41,8 @@ namespace ExpenseManagementSystem.Controllers
            
         }
 
-       
 
+       
         // GET: PersonalClaim/Create
         public IActionResult AddClaim()
         {

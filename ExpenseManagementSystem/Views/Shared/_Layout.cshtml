@@ -36,15 +36,16 @@
         </nav>
     </header>
 
-    <div class="sidebar">
+    <div class="sidebar" >
         <div style="padding-top:25px">
             <a asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>   Home</a>
-            <a asp-controller="" asp-action=""><i class="fa fa-file-text" aria-hidden="true"></i>   Claims </a>
+            <a asp-controller="Home" asp-action="Secured"><i class="fa-solid fa-house"></i>   Secured</a>
+            <a asp-controller="PersonalClaim" asp-action="ClaimPage"><i class="fa fa-file-text" aria-hidden="true"></i>   Claims </a>
             <a asp-controller="" asp-action=""> <i class="fa fa-user" aria-hidden="true" ></i>   Manager Section </a>
             <a asp-controller="" asp-action=""><i class="fa fa-money"  aria-hidden="true"></i>  Finance Manager </a>
             <a asp-controller="" asp-action=""><i class="fa fa-question-circle"  aria-hidden="true"></i>  Details and Help </a>
             @*  <a asp-area="" asp-controller="Home" asp-action="About"> About </a>*@
-           <a asp-controller="" asp-action=""><i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a>
+           <a asp-controller="Home" asp-action="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a>
         </div>
     </div>
 

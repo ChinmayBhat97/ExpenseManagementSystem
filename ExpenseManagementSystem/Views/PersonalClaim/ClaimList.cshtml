@@ -7,71 +7,80 @@
 <h3 style="padding-left:250px">
     Claims List
 </h3>
-
-<table class="table" style="padding-left:350px">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.claimID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.claimantName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.claimantEmailID)
-            </th>
-          @*  <th>
+<div style="padding-left:250px">
+    <table class="table-bordered" style="width:70%">
+        <thead style="background-color:white;height:35px; text-align: center;font-size:17px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.claimID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.claimantName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.claimantEmailID)
+                </th>
+                @*  <th>
                 @Html.DisplayNameFor(model => model.DeptID)
-            </th>*@
-            
-          @*  <th>
-                @Html.DisplayNameFor(model => model.billingDate)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.claimingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stusID)
-            </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.ImageFile)
-            </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.claimID)
-                </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.claimantName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.claimantEmailID)
-            </td>
-           @* <td>
-                @Html.DisplayFor(modelItem => item.DeptID)
-            </td>*@
-            
-          @*  <td>
-                @Html.DisplayFor(modelItem => item.billingDate)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.claimingDate)
-            </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.stusID)
-                </td>
-            
-           
-        </tr>
-}
-    </tbody>
-</table>
+                </th>*@
 
-<div class="form-group" style="padding-left:250px">
+                @*  <th>
+                @Html.DisplayNameFor(model => model.billingDate)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.claimingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.stusID)
+                </th>
+                @* <th>
+                @Html.DisplayNameFor(model => model.ImageFile)
+                </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.claimID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.claimantName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.claimantEmailID)
+                    </td>
+                    @* <td>
+                @Html.DisplayFor(modelItem => item.DeptID)
+                </td>*@
+
+                    @*  <td>
+                @Html.DisplayFor(modelItem => item.billingDate)
+                </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.claimingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.stusID)
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*<div class="form-group" style="padding-left:250px">
     <a asp-action="ClaimPage">Back to List</a>
     <input type="submit" value="Create" class="btn btn-primary" />
+    </div>*@
+
+    <div class="d-flex flex-row-reverse bd-highlight" style="padding-right:25px">
+        @* <input type="submit" value="Save" class="btn btn-success" style="width:100px; margin:10px" />*@
+        <a asp-action="ClaimPage" class="btn  btn-primary" style="width:100px; margin:10px"> Back </a>
+    </div>
+
+
 </div>

@@ -1,0 +1,34 @@
+﻿@model ExpenseManagementSystem.Models.Employee;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <form asp-controller="Access" asp-action="Login" method="post">
+        <h3>Login </h3>
+        <input  type="email" asp-for="empEmailID" placeholder="Email-ID"/>
+        <input type="password" asp-for="passWord" placeholder="Password" />
+
+        <lable>
+            <input type="checkbox" asp-for="keepLoggedIn" /> Keep Me Logged In.
+        </lable>
+
+        <button type="submit" > Login</button>
+
+        @if (ViewData["validateMessage"] != null)
+        {
+            <br />
+            <br />
+            <label> @ViewData["validateMessage"]</label>
+        }
+
+    </form>
+</body>
+</html>

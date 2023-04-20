@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseManagementSystem.Models
 {
-    public class Employee
+    public class Employee: IdentityUser
     {
         [Key]
 
@@ -30,6 +31,10 @@ namespace ExpenseManagementSystem.Models
         public ulong adhaarCardNum  { get; set; }
         
         public DateTime DateOfJoining { get; set; }
+
+        public string passWord { get; set; }
+
+        public bool keepLoggedIn { get; set; }
 
     }
 }
