@@ -27,7 +27,7 @@ namespace ExpenseManagementSystem.Controllers
         //    return View();
         //}
 
-        [Authorize(Roles = "Example Role")]
+        [Authorize(Roles = "Intern")]
         public IActionResult Secured()
         {
             return View();

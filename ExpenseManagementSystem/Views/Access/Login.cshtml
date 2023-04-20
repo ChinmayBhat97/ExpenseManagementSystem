@@ -13,12 +13,12 @@
 <body>
     <form asp-controller="Access" asp-action="Login" method="post">
         <h3>Login </h3>
-        <input  type="email" asp-for="empEmailID" placeholder="Email-ID"/>
-        <input type="password" asp-for="passWord" placeholder="Password" />
+        <input  type="email" name="emailID" placeholder="Email-ID"/>
+        <input type="password" name="pwd" placeholder="Password" />
 
-        <lable>
-            <input type="checkbox" asp-for="keepLoggedIn" /> Keep Me Logged In.
-        </lable>
+       @* <lable>
+            <input type="checkbox" name="keepIn" /> Keep Me Logged In.
+        </lable>*@
 
         <button type="submit" > Login</button>
 

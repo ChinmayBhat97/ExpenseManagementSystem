@@ -3,12 +3,19 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ExpenseManagementSystem.Models;
-
+using ExpenseManagementSystem.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseManagementSystem.Controllers
 {
     public class AccessController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        public AccessController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Login()
         {
             ClaimsPrincipal claimsUser = HttpContext.User;
@@ -22,14 +29,19 @@ namespace ExpenseManagementSystem.Controllers
         }
 
         [HttpPost] 
-        public async Task <IActionResult> Login(VMLogin vMLogin)
+        public async Task <IActionResult> Login(string emailID, string pwd,Employee employee )
         {
-            if (vMLogin.empEmailID =="chinmay29@gamil.com" && vMLogin.passWord=="Chinmay29$")
+            var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
+            var checkPWD = _context.Employees.Any(j=>j.passWord==pwd);
+            var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
+
+            
+            if ((checkUser && checkPWD)==true)
             {
                 List<Claim> claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier,vMLogin.empEmailID),
-                    new Claim(ClaimTypes.Role ,"Example Role")
+                    new Claim(ClaimTypes.NameIdentifier,emailID),
+                    new Claim(ClaimTypes.Role, role)
                     //new Claim("OtherProperties","Example Role")
                 };
 
@@ -38,11 +50,11 @@ namespace ExpenseManagementSystem.Controllers
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {
                     AllowRefresh= true,
-                    IsPersistent = vMLogin.KeepLoggedIn
+                    IsPersistent =employee.keepLoggedIn
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                   new ClaimsPrincipal(claimsIdentity),properties );
+                   new ClaimsPrincipal(claimsIdentity)/*, properties*/);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -53,3 +65,11 @@ namespace ExpenseManagementSystem.Controllers
         }
     }
 }
+
+
+//var checkUsername = _context.Users.Any(u => u.userName == user.userName);
+//if (checkUsername == true)
+//{
+//    ViewBag.userName=$"User name {user.userName} already in exist.Try with different User name.";
+//    return View();
+//}
