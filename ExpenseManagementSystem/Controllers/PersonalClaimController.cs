@@ -31,6 +31,8 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+              
+
                 var applicationDbContext = _context.PersonalClaims.Include(p => p.Department);
                 return View(await applicationDbContext.ToListAsync());
             }
@@ -100,9 +102,13 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
-                var ListofClaims = await _context.PersonalClaims.ToListAsync();
-               //var ListofClaims = await _context.PersonalClaims.FromSqlRaw("_SP_forClaimList").ToListAsync();
-                 
+                string loggedEmail = string.Empty;
+                 loggedEmail= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+                //var ListofClaims = await _context.PersonalClaims.Where(e =>e.claimantEmailID ==str);
+                var ListofClaims = await _context.PersonalClaims.Where(e =>e.claimantEmailID==loggedEmail).ToListAsync();
+                //var ListofClaims = await _context.PersonalClaims.FromSqlRaw("_SP_forClaimList").ToListAsync();
+
                 return View(ListofClaims);
             }
             catch (Exception ex)

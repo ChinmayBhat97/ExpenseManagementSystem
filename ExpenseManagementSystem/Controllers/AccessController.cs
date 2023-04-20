@@ -34,8 +34,8 @@ namespace ExpenseManagementSystem.Controllers
             var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
             var checkPWD = _context.Employees.Any(j=>j.passWord==pwd);
             var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
+            TempData["userEmail-ID"] = emailID;
 
-            
             if ((checkUser && checkPWD)==true)
             {
                 List<Claim> claims = new List<Claim>
@@ -50,7 +50,7 @@ namespace ExpenseManagementSystem.Controllers
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {
                     AllowRefresh= true,
-                    IsPersistent =employee.keepLoggedIn
+                    IsPersistent =employee.keepLoggedIn=true
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
