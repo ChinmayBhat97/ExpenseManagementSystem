@@ -10,11 +10,11 @@ using ExpenseManagementSystem.Models;
 
 namespace ExpenseManagementSystem.Controllers
 {
-    public class ManagersController : Controller
+    public class FinanceManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ManagersController(ApplicationDbContext context)
+        public FinanceManagerController(ApplicationDbContext context)
         {
             _context = context;
         }

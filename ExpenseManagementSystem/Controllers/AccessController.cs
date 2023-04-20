@@ -31,6 +31,8 @@ namespace ExpenseManagementSystem.Controllers
         [HttpPost] 
         public async Task <IActionResult> Login(string emailID, string pwd,Employee employee )
         {
+            //ViewBag.User=emailID;
+            //ViewBag.Keep();
             var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
             var checkPWD = _context.Employees.Any(j=>j.passWord==pwd);
             var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
@@ -59,7 +61,7 @@ namespace ExpenseManagementSystem.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewData["validateMessage"]="User not found";
+            ViewData["validateMessage"]="Invalid credentials, kindly check and try again!.";
 
             return View();
         }
