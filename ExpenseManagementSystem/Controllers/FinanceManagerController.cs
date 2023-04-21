@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExpenseManagementSystem.Data;
 using ExpenseManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExpenseManagementSystem.Controllers
 {
+    [Authorize(Roles = "Finanace Manager")]
     public class FinanceManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,82 +21,92 @@ namespace ExpenseManagementSystem.Controllers
             _context = context;
         }
 
-        // GET: Managers
-        public async Task<IActionResult> Index()
+        // Initial Page Managers
+        public async Task<IActionResult> InitialPage()
         {
-            var applicationDbContext = _context.PersonalClaims.Include(p => p.ClaimStatus).Include(p => p.Department);
-            return View(await applicationDbContext.ToListAsync());
+            try
+            {
+                var claimLists = _context.PersonalClaims.Include(p => p.ClaimStatus).Include(p => p.Department);
+                return View(await claimLists.ToListAsync());
+            }
+            catch(Exception ex)
+            {
+                return View(ex.Message);
+            }
+
+           
         }
 
-        // GET: Managers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // Get Claim List approved by Manager
+        public async Task<IActionResult> ViewClaim(int? id)
         {
-            if (id == null || _context.PersonalClaims == null)
+            try
             {
-                return NotFound();
+                var viewClaimApplied = await _context.PersonalClaims.FirstOrDefaultAsync(m => m.claimID == id);
+
+
+                if (viewClaimApplied == null)
+                {
+                    return NotFound();
+                }
+
+                return View(viewClaimApplied);
+            }
+            catch(Exception ex)
+            {
+                return View(ex.Message);
             }
 
-            var personalClaim = await _context.PersonalClaims
-                .Include(p => p.ClaimStatus)
-                .Include(p => p.Department)
-                .FirstOrDefaultAsync(m => m.claimID == id);
-            if (personalClaim == null)
-            {
-                return NotFound();
-            }
-
-            return View(personalClaim);
+           
         }
 
-        
 
-        // GET: Managers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+        // GET: List to Update Claim approved by manager
+        public async Task<IActionResult> updateClaimApproved(int? id)
         {
-            if (id == null || _context.PersonalClaims == null)
+            try
             {
-                return NotFound();
+                var updateClaim = await _context.PersonalClaims.FindAsync(id);
+                if (updateClaim == null)
+                {
+                    return NotFound();
+                }
+                //ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id", personalClaim.stusID);
+                //ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
+                return View(updateClaim);
             }
-
-            var personalClaim = await _context.PersonalClaims.FindAsync(id);
-            if (personalClaim == null)
+            catch(Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
-            ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id", personalClaim.stusID);
-            ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
-            return View(personalClaim);
+           
         }
 
-        // POST: Managers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,  PersonalClaim personalClaim)
+        public async Task<IActionResult> updateClaimApproved(int id,  PersonalClaim personalClaim)
         {
-            if (id != personalClaim.claimID)
-            {
-                return NotFound();
-            }
+           
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(personalClaim);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex) 
                 {
                     return View(ex.Message);
                 }
                 
-                return RedirectToAction(nameof(Index));
-            }
+                
+            
             //ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id", personalClaim.stusID);
             //ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
-            return View();
+            
         }
 
         

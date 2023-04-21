@@ -9,14 +9,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Finance Mananger Lists</title>
 </head>
 <body>
 @*<p>
     <a asp-action="Create">Create New</a>
 </p>*@
-<div style="padding-left:250px;padding-top:100px">
-    <h3> Managers Lists </h3>
+<div style="padding-left:250px;padding-top:50px">
+    <h3> Finance Manager Lists </h3>
 </div>
 <div style="padding-left:250px">
 
@@ -53,9 +53,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.claimingDate)
             </th>
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.ClaimStatus)
-            </th>
+            </th>*@
             @*<th>
                 @Html.DisplayNameFor(model => model.ImageName)
             </th>
@@ -68,7 +68,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.remarkFinanace)
             </th>*@
-            <th>Actions</th>
+            <th>Details</th>
         </tr>
     </thead>
             <tbody style="background-color:white;height:25px; text-align:left;font-size:17px;padding-left:15px">
@@ -81,7 +81,27 @@
                 @Html.DisplayFor(modelItem => item.claimantEmailID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Department.Id)
+                            @*@Html.DisplayFor(modelItem => item.DeptID)*@
+                            @if (item.DeptID==1)
+                            {
+                                <h6> Accounts</h6>
+                            }
+                            else if (item.DeptID==2)
+                            {
+                                <h6> Financial Services</h6>
+                            }
+                            else if (item.DeptID==3)
+                            {
+                                <h6> Enablement Services</h6>
+                            }
+                            else if (item.DeptID==4)
+                            {
+                                <h6>Human Resources</h6>
+                            }
+                            else
+                            {
+                                <h6> Software Services</h6>
+                            }
             </td>
            @* <td>
                 @Html.DisplayFor(modelItem => item.managerName)
@@ -104,9 +124,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.claimingDate)
             </td>
-            <td>
+           @* <td>
                 @Html.DisplayFor(modelItem => item.ClaimStatus.Id)
-            </td>
+
+
+
+            </td>*@
            @* <td>
                 @Html.DisplayFor(modelItem => item.ImageName)
             </td>
@@ -121,8 +144,8 @@
             </td>*@
             <td>
               @*  <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |*@
-                <a asp-action="Details" asp-route-id="@item.claimID">Details</a> 
-              @*  <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@
+                            <a asp-action="ViewClaim" asp-route-id="@item.claimID"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
+                            @*  <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@
             </td>
         </tr>
 }

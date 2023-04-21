@@ -13,7 +13,7 @@ using System.Data;
 
 namespace ExpenseManagementSystem.Controllers
 {
-    
+    [Authorize(Roles = "Finanace Manager, Manager, Intern")]
     public class PersonalClaimController : Controller
     {
         private readonly ApplicationDbContext _context;

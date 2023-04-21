@@ -11,7 +11,7 @@
 <body style="overflow:auto">
 
 <div style="padding-left:250px;">
-    <h4>Claim Details</h4>
+    <h4> Claim Details</h4>
     <br />
         <div class="col-md-12">
 
@@ -30,11 +30,33 @@
                             </div>
 
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <b> Department: </b> @Html.DisplayFor(model => model.DeptID)
-                                </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <b> Department: </b>
+                                @if (Model.DeptID==1)
+                                {
+                                    <h6> Accounts</h6>
+                                }
+                                else if (Model.DeptID==2)
+                                {
+                                    <h6> Financial Services</h6>
+                                }
+                                else if (Model.DeptID==3)
+                                {
+                                    <h6> Enablement Services</h6>
+                                }
+                                else if (Model.DeptID==4)
+                                {
+                                    <h6>Human Resources</h6>
+                                }
+                                else
+                                {
+                                    <h6> Software Services</h6>
+                                }
+
                             </div>
+                        </div>
                     </div>
 
                     <br />
@@ -180,8 +202,9 @@
     <br />
 </div>
     <div style ="padding-left:850px;">
-    <a asp-action="Edit" asp-route-id="@Model?.claimID">Edit</a> 
-    <a asp-action="Index">Back to List</a>
+        <a asp-action="InitialPage" class="btn btn-primary">Back to List</a>
+        <a asp-action="updateClaimApproved" asp-route-id="@Model?.claimID" class="btn btn-success"> Update </a>
+       
    </div>
 </body>
 </html>

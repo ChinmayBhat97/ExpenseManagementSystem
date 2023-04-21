@@ -31,11 +31,11 @@ namespace ExpenseManagementSystem.Controllers
         [HttpPost] 
         public async Task <IActionResult> Login(string emailID, string pwd,Employee employee )
         {
-            //ViewBag.User=emailID;
-            //ViewBag.Keep();
+           
             var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
             var checkPWD = _context.Employees.Any(j=>j.passWord==pwd);
             var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
+            TempData["tagEmail-ID"] = emailID;
             TempData["userEmail-ID"] = emailID;
 
             if ((checkUser && checkPWD)==true)

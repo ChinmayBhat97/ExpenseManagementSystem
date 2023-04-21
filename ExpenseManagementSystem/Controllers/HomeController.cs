@@ -20,6 +20,10 @@ namespace ExpenseManagementSystem.Controllers
        
         public IActionResult Index()
         {
+            string loggedUser = string.Empty;
+            ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+            TempData.Keep();
+
             return View();
         }
         //public IActionResult Login()
@@ -27,11 +31,11 @@ namespace ExpenseManagementSystem.Controllers
         //    return View();
         //}
 
-        [Authorize(Roles = "Intern")]
-        public IActionResult Secured()
-        {
-            return View();
-        }
+        ////[Authorize(Roles = "Intern")]
+        ////public IActionResult Secured()
+        ////{
+        ////    return View();
+        ////}
 
         public async Task <IActionResult> Logout()
         {
