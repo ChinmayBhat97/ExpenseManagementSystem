@@ -18,60 +18,73 @@ namespace ExpenseManagementSystem.Controllers
 
         public IActionResult Login()
         {
-            ClaimsPrincipal claimsUser = HttpContext.User;
 
-            if(claimsUser.Identity.IsAuthenticated )
+            try
             {
-                return RedirectToAction("Index", "Home");
+                ClaimsPrincipal claimsUser = HttpContext.User;
+
+                if (claimsUser.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                return View();
+            }
+            catch(Exception ex)
+            {
+                return View(ex.Message);
             }
 
-            return View();
+            
         }
 
         [HttpPost] 
         public async Task <IActionResult> Login(string emailID, string pwd,Employee employee )
         {
-           
-            var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
-            var checkPWD = _context.Employees.Any(j=>j.passWord==pwd);
-            var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
-            TempData["tagEmail-ID"] = emailID;
-            TempData["userEmail-ID"] = emailID;
-
-            if ((checkUser && checkPWD)==true)
+            try
             {
-                List<Claim> claims = new List<Claim>
+                var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
+                var checkPWD = _context.Employees.Any(j => j.passWord==pwd);
+                var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
+                TempData["tagEmail-ID"] = emailID;
+                TempData["userEmail-ID"] = emailID;
+
+                if ((checkUser && checkPWD)==true)
+                {
+                    List<Claim> claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier,emailID),
                     new Claim(ClaimTypes.Role, role)
-                    //new Claim("OtherProperties","Example Role")
+                   
                 };
 
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                AuthenticationProperties properties = new AuthenticationProperties()
-                {
-                    AllowRefresh= true,
-                    IsPersistent =employee.keepLoggedIn=true
-                };
+                    AuthenticationProperties properties = new AuthenticationProperties()
+                    {
+                        AllowRefresh= true,
+                        IsPersistent =employee.keepLoggedIn=false
+                    };
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                   new ClaimsPrincipal(claimsIdentity)/*, properties*/);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                       new ClaimsPrincipal(claimsIdentity), properties);
 
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ViewData["validateMessage"]="Invalid credentials, kindly check and try again!.";
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
             }
 
-            ViewData["validateMessage"]="Invalid credentials, kindly check and try again!.";
 
-            return View();
+            
         }
     }
 }
 
 
-//var checkUsername = _context.Users.Any(u => u.userName == user.userName);
-//if (checkUsername == true)
-//{
-//    ViewBag.userName=$"User name {user.userName} already in exist.Try with different User name.";
-//    return View();
-//}

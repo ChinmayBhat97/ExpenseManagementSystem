@@ -55,11 +55,12 @@ namespace ExpenseManagementSystem.Models
 
         [DisplayName("Amount")]
         public int claimAmount { get; set; }
-       
+
+        [AllowNull]
         [DisplayName("Manager Remarks")]
         public string remarkManager { get; set; }
 
-      
+        [AllowNull]
         [DisplayName("Finance Manager Remarks")]
         public string remarkFinanace { get; set; }
 

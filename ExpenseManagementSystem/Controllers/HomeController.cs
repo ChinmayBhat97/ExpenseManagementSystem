@@ -20,33 +20,38 @@ namespace ExpenseManagementSystem.Controllers
        
         public IActionResult Index()
         {
-            string loggedUser = string.Empty;
-            ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
-            TempData.Keep();
 
-            return View();
+            try
+            {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+                return View();
+            }
+            catch (Exception ex) 
+            {
+                return View(ex.Message);
+            }
+           
         }
-        //public IActionResult Login()
-        //{
-        //    return View();
-        //}
-
-        ////[Authorize(Roles = "Intern")]
-        ////public IActionResult Secured()
-        ////{
-        ////    return View();
-        ////}
+       
 
         public async Task <IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Access");
+            try
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Login", "Access");
+            }
+            catch(Exception ex) 
+            {
+                return View(ex.Message);
+            }
+
+
         }
 
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+       
     }
 }

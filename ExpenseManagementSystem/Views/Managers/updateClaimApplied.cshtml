@@ -18,8 +18,10 @@
         <div class="row">
             <div class="col-md-12">
                
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               
+                    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
                     <br />
+             
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -145,7 +147,7 @@
                 <br />
 
                 <input type="hidden" asp-for="claimID" />
-                <form asp-action="Edit">
+                <form asp-action="updateClaimApplied">
                      <div class="row"> 
                             <div class="col-md-10"> 
                                 <div class="form-group">
@@ -184,7 +186,7 @@
                     </div>
 
 
-                </form>
+               </form>
                 <br />
                
                

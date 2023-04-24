@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ExpenseManagementSystem.Data;
 using ExpenseManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Data.SqlClient;
 
 namespace ExpenseManagementSystem.Controllers
 {
@@ -27,8 +28,13 @@ namespace ExpenseManagementSystem.Controllers
 
             try
             {
-                var claimLists = _context.PersonalClaims.Include(p => p.ClaimStatus).Include(p => p.Department);
-                return View(await claimLists.ToListAsync());
+
+                string loggedEmail = string.Empty;
+                loggedEmail= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+                var ListofClaims = await _context.PersonalClaims.Where(e => e.managerEmailID==loggedEmail).ToListAsync();
+              
+                return View( ListofClaims);
             }
             catch (Exception Ex)
             {
@@ -42,6 +48,7 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+
                 var viewClaimApplied = await _context.PersonalClaims.FirstOrDefaultAsync(m => m.claimID == id);
 
 
@@ -61,15 +68,12 @@ namespace ExpenseManagementSystem.Controllers
            
         }
 
-        
 
-        // GET: List to Update Claim
+
+       // GET: List to Update Claim
         public async Task<IActionResult> updateClaimApplied(int? id)
         {
-            //if (id == null || _context.PersonalClaims == null)
-            //{
-            //    return NotFound();
-            //}
+
             try
             {
                 var editClaim = await _context.PersonalClaims.FindAsync(id);
@@ -77,41 +81,46 @@ namespace ExpenseManagementSystem.Controllers
                 {
                     return NotFound();
                 }
-                ////ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id", personalClaim.stusID);
-                ////ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
+
                 return View(editClaim);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View(ex.Message);
             }
-            
+
         }
 
-        // POST: Managers/Edit/5
-        [HttpPost]
-        public async Task<IActionResult> updateClaimApplied(int id,  PersonalClaim personalClaim)
+       // POST update claims applied
+       [HttpPost]
+        public IActionResult updateClaimApplied(int id,string remarkManager, int stusID)
         {
-            
-
-            //if (ModelState.IsValid)
-            //{
+         
                 try
                 {
-                    _context.Update(personalClaim);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(ViewClaim));
+                //  var updateClaim =  _context.Database.ExecuteSqlRaw("_SPClaimUpdateManagerFor {0},{1},{2}",id,remarkManager,stusID);
+
+                SqlConnection con = new SqlConnection("Server=DESKTOP-0F310TS\\SQLEXPRESS ; Initial Catalog = ExpensesManagementSystem; trusted_connection=true; MultipleActiveResultSets=True");
+                SqlCommand com = new SqlCommand("_SPClaimUpdateManagerFor", con);
+                com.CommandType = System.Data.CommandType.StoredProcedure;
+
+                com.Parameters.AddWithValue("@id",id);
+                com.Parameters.AddWithValue("@remarksManager", remarkManager);
+                com.Parameters.AddWithValue("@stusID", stusID);
+
+                con.Open();
+                int n = com.ExecuteNonQuery();
+                con.Close();
+
+
+
+                return RedirectToAction(nameof(FrontPage));
                 }
                 catch (Exception ex) 
                 {
                     return View(ex.Message);
                 }
                 
-                
-            
-            //ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id", personalClaim.stusID);
-            //ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
-            
         }
 
         
@@ -120,94 +129,3 @@ namespace ExpenseManagementSystem.Controllers
 
 
 
-//// GET: Managers/Create
-//public IActionResult Create()
-//{
-//    ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id");
-//    ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id");
-//    return View();
-//}
-
-//// POST: Managers/Create
-//// To protect from overposting attacks, enable the specific properties you want to bind to.
-//// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-//[HttpPost]
-//[ValidateAntiForgeryToken]
-//public async Task<IActionResult> Create([Bind("claimID,claimantName,claimantEmailID,DeptID,managerName,managerEmailID,accuntNumber,IFSC,description,billingDate,claimingDate,stusID,ImageName,claimAmount,remarkManager,remarkFinanace")] PersonalClaim personalClaim)
-//{
-//    if (ModelState.IsValid)
-//    {
-//        _context.Add(personalClaim);
-//        await _context.SaveChangesAsync();
-//        return RedirectToAction(nameof(Index));
-//    }
-//    ViewData["stusID"] = new SelectList(_context.ClaimStatuses, "Id", "Id", personalClaim.stusID);
-//    ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
-//    return View(personalClaim);
-//}
-
-
-
-//// GET: Managers/Delete/5
-//public async Task<IActionResult> Delete(int? id)
-//{
-//    if (id == null || _context.PersonalClaims == null)
-//    {
-//        return NotFound();
-//    }
-
-//    var personalClaim = await _context.PersonalClaims
-//        .Include(p => p.ClaimStatus)
-//        .Include(p => p.Department)
-//        .FirstOrDefaultAsync(m => m.claimID == id);
-//    if (personalClaim == null)
-//    {
-//        return NotFound();
-//    }
-
-//    return View(personalClaim);
-//}
-
-//// POST: Managers/Delete/5
-//[HttpPost, ActionName("Delete")]
-//[ValidateAntiForgeryToken]
-//public async Task<IActionResult> DeleteConfirmed(int id)
-//{
-//    if (_context.PersonalClaims == null)
-//    {
-//        return Problem("Entity set 'ApplicationDbContext.PersonalClaims'  is null.");
-//    }
-//    var personalClaim = await _context.PersonalClaims.FindAsync(id);
-//    if (personalClaim != null)
-//    {
-//        _context.PersonalClaims.Remove(personalClaim);
-//    }
-
-//    await _context.SaveChangesAsync();
-//    return RedirectToAction(nameof(Index));
-//}
-
-//private bool PersonalClaimExists(int id)
-//{
-//    return (_context.PersonalClaims?.Any(e => e.claimID == id)).GetValueOrDefault();
-//}
-
-
-//public async Task<IActionResult> Details(int? id)
-//{
-//    if (id == null || _context.PersonalClaims == null)
-//    {
-//        return NotFound();
-//    }
-
-//    var personalClaim = await _context.PersonalClaims
-//        .Include(p => p.ClaimStatus)
-//        .Include(p => p.Department)
-//        .FirstOrDefaultAsync(m => m.claimID == id);
-//    if (personalClaim == null)
-//    {
-//        return NotFound();
-//    }
-
-//    return View(personalClaim);
-//}

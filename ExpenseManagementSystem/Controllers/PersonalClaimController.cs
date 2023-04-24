@@ -25,8 +25,8 @@ namespace ExpenseManagementSystem.Controllers
             _context = context;
             _hostEnvironment=hostEnvironment;
         }
-       
-        // GET: PersonalClaim
+        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        // Front Page
         public async Task<IActionResult> ClaimPage()
         {
             try
@@ -44,8 +44,8 @@ namespace ExpenseManagementSystem.Controllers
         }
 
 
-       
-        // GET: PersonalClaim/Create
+        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        // Add Personal Claim 
         public IActionResult AddClaim()
         {
             try
@@ -56,18 +56,17 @@ namespace ExpenseManagementSystem.Controllers
             {
                 return View(ex.Message);
             }
-            //ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id");
+          
            
         }
-
-        // POST: PersonalClaim/Create
+        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        // POST  Personal Claim 
         [HttpPost]
         public async Task<IActionResult> AddClaim(PersonalClaim personalClaim)
         {
             try
             {
-                //if (ModelState.IsValid)
-                //{
+               
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(personalClaim.ImageFile.FileName);
                 string extension = Path.GetExtension(personalClaim.ImageFile.FileName);
@@ -80,13 +79,14 @@ namespace ExpenseManagementSystem.Controllers
 
                 personalClaim.stusID=1;
                 personalClaim.claimingDate=DateTime.Now.Date;
+                personalClaim.remarkManager= "Yet to Update";
+                personalClaim.remarkFinanace= "Yet to Update";
+
 
                 _context.Add(personalClaim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ClaimPage));
-                //}
-                ////ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
-                //return View(personalClaim);
+               
             }
             catch (Exception ex)
             {
@@ -96,8 +96,8 @@ namespace ExpenseManagementSystem.Controllers
           
         }
 
-
-        // GET: PersonalClaim
+        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        // GET PersonalClaim list
         public async Task<IActionResult> ClaimList()
         {
             try
@@ -105,9 +105,9 @@ namespace ExpenseManagementSystem.Controllers
                 string loggedEmail = string.Empty;
                  loggedEmail= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
-                //var ListofClaims = await _context.PersonalClaims.Where(e =>e.claimantEmailID ==str);
+              
                 var ListofClaims = await _context.PersonalClaims.Where(e =>e.claimantEmailID==loggedEmail).ToListAsync();
-                //var ListofClaims = await _context.PersonalClaims.FromSqlRaw("_SP_forClaimList").ToListAsync();
+               
 
                 return View(ListofClaims);
             }
