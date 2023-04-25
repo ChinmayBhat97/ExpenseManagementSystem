@@ -29,8 +29,13 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
-                var claimLists = _context.PersonalClaims.Include(p => p.ClaimStatus).Include(p => p.Department);
-                return View(await claimLists.ToListAsync());
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+                string status = "Approved by Managar";
+                var claimLists = await _context.PersonalClaims.Where(p => p.remarkManager==status).ToListAsync();
+                return View(claimLists);
             }
             catch(Exception ex)
             {
@@ -87,7 +92,7 @@ namespace ExpenseManagementSystem.Controllers
 
       
         [HttpPost]
-        public async Task<IActionResult> updateClaimApproved(int id, string remarkManager, int stusID)
+        public IActionResult updateClaimApproved(int id, string remarkFinanace, int stusID)
         {
 
             try
@@ -95,18 +100,16 @@ namespace ExpenseManagementSystem.Controllers
                 //  var updateClaim =  _context.Database.ExecuteSqlRaw("_SPClaimUpdateManagerFor {0},{1},{2}",id,remarkManager,stusID);
 
                 SqlConnection con = new SqlConnection("Server=DESKTOP-0F310TS\\SQLEXPRESS ; Initial Catalog = ExpensesManagementSystem; trusted_connection=true; MultipleActiveResultSets=True");
-                SqlCommand com = new SqlCommand("_SPClaimUpdateManagerFor", con);
+                SqlCommand com = new SqlCommand("_SPClaimUpdateFinanceManager", con);
                 com.CommandType = System.Data.CommandType.StoredProcedure;
 
                 com.Parameters.AddWithValue("@id", id);
-                com.Parameters.AddWithValue("@remarksManager", remarkManager);
+                com.Parameters.AddWithValue("@remarkFinanace", remarkFinanace);
                 com.Parameters.AddWithValue("@stusID", stusID);
 
                 con.Open();
                 int n = com.ExecuteNonQuery();
                 con.Close();
-
-
 
                 return RedirectToAction(nameof(InitialPage));
             }
@@ -119,6 +122,55 @@ namespace ExpenseManagementSystem.Controllers
         }
 
 
+        public async Task<IActionResult> ClaimsApproved()
+        {
+            try
+            {
+                // string status = "Approved by Finance Manager";
+                int status = 3;
+                var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
+                return View(claimLists);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+        public async Task<IActionResult> ClaimsPartialApproved()
+        {
+            try
+            {
+                int status = 5;
+                var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
+                return View(claimLists);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        public async Task<IActionResult> ClaimsRejected()
+        {
+            try
+            {
+                int status = 7;
+                var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
+                if (claimLists.Count()==0)
+                {
+                    ViewBag.noRecords= "No records found for rejected claims.";
+
+                }                
+                return View(claimLists);
+
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
     }
 }
 

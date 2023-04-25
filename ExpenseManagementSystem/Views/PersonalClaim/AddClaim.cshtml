@@ -128,7 +128,7 @@
                             </b>
                         <div class="currency-wrap">
                             <input asp-for="claimAmount" class="form-control" />
-                            <span class="currency-code"> <i class="fa fa-inr" aria-hidden="true" style="top:10px"></i> </span>
+                            <span class="currency-code"> <i class="fa fa-inr" aria-hidden="true" style="padding-bottom:20px"></i> </span>
                         </div>   
                         <span asp-validation-for="claimAmount" class="text-danger"></span>
                     </div>
@@ -153,8 +153,8 @@
             <br />
 
             <div class="d-flex flex-row-reverse bd-highlight" style="padding-right:25px">
-                <input type="submit" value="Save" class="btn btn-success" style="width:100px; margin:10px" />
-                <a asp-action="ClaimPage" class="btn  btn-primary" style="width:100px; margin:10px"> Back </a>
+                <input type="submit" value="Save" class="btn btn-outline-success" style="width:100px; margin:10px" />
+                <a asp-action="ClaimPage" class="btn  btn-outline-primary" style="width:100px; margin:10px"> Back </a>
             </div>
 
         </form>

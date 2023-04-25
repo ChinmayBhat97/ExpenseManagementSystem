@@ -13,7 +13,7 @@ using System.Data;
 
 namespace ExpenseManagementSystem.Controllers
 {
-    [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+    [Authorize(Roles = "Finanace Manager, Manager, Intern,Engineer")]
     public class PersonalClaimController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,13 +25,15 @@ namespace ExpenseManagementSystem.Controllers
             _context = context;
             _hostEnvironment=hostEnvironment;
         }
-        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
         // Front Page
         public async Task<IActionResult> ClaimPage()
         {
             try
             {
-              
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
 
                 var applicationDbContext = _context.PersonalClaims.Include(p => p.Department);
                 return View(await applicationDbContext.ToListAsync());
@@ -44,7 +46,7 @@ namespace ExpenseManagementSystem.Controllers
         }
 
 
-        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
         // Add Personal Claim 
         public IActionResult AddClaim()
         {
@@ -59,14 +61,18 @@ namespace ExpenseManagementSystem.Controllers
           
            
         }
-        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
         // POST  Personal Claim 
         [HttpPost]
         public async Task<IActionResult> AddClaim(PersonalClaim personalClaim)
         {
             try
             {
-               
+
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(personalClaim.ImageFile.FileName);
                 string extension = Path.GetExtension(personalClaim.ImageFile.FileName);
@@ -96,7 +102,7 @@ namespace ExpenseManagementSystem.Controllers
           
         }
 
-        [Authorize(Roles = "Finanace Manager, Manager, Intern")]
+        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
         // GET PersonalClaim list
         public async Task<IActionResult> ClaimList()
         {

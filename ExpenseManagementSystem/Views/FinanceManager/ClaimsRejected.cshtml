@@ -1,0 +1,177 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<ExpenseManagementSystem.Models.PersonalClaim>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Finance Mananger Partial Approved Lists</title>
+</head>
+<body>
+    @*<p>
+    <a asp-action="Create">Create New</a>
+    </p>*@
+    <div >
+        <h3 style="padding-left:250px;padding-top:50px;color:#0000b3"> Finance Manager Rejected Lists </h3>
+        <br />
+    </div>
+    <div style="padding-left:250px">
+
+        <table class="table-bordered" style="width:100%">
+            <thead style="background-color:white;height:35px; text-align: center;font-size:17px">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.claimantName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.claimantEmailID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Department)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.managerName)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.managerEmailID)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.accuntNumber)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.IFSC)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.description)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.billingDate)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.claimingDate)
+                    </th>
+                    @* <th>
+                    @Html.DisplayNameFor(model => model.ClaimStatus)
+                    </th>*@
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.ImageName)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.claimAmount)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.remarkManager)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.remarkFinanace)
+                    </th>*@
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody style="background-color:white;height:25px; text-align:left;font-size:17px;padding-left:15px">
+                @foreach (var item in Model)
+                    @if(Model.Count()==0)
+                    {
+                       @ViewBag.noRecords
+                        <h3> No records found for rejected claims!.</h3>
+                    }
+              else  {
+                        
+                     <tr>
+                            <td>
+                               @Html.DisplayFor(modelItem => item.claimantName)
+                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.claimantEmailID)
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.DeptID)*@
+                                    @if (item.DeptID==1)
+                                    {
+                                        <h6> Accounts</h6>
+                                    }
+                                    else if (item.DeptID==2)
+                                    {
+                                        <h6> Financial Services</h6>
+                                    }
+                                    else if (item.DeptID==3)
+                                    {
+                                        <h6> Enablement Services</h6>
+                                    }
+                                    else if (item.DeptID==4)
+                                    {
+                                        <h6>Human Resources</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6> Software Services</h6>
+                                    }
+                                </td>
+                                @* <td>
+                    @Html.DisplayFor(modelItem => item.managerName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.managerEmailID)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.accuntNumber)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.IFSC)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.billingDate)
+                    </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.claimingDate)
+                                </td>
+                                @* <td>
+                    @Html.DisplayFor(modelItem => item.ClaimStatus.Id)
+
+
+
+                    </td>*@
+                                @* <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.claimAmount)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.remarkManager)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.remarkFinanace)
+                    </td>*@
+                                <td>
+                                    @*  <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |*@
+                                    <a asp-action="ViewClaim" asp-route-id="@item.claimID"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
+                                    @*  <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@
+                                </td>
+                            </tr>
+                        
+
+               }
+                
+            </tbody>
+        </table>
+
+        <div style="padding-left:800px">
+            <a asp-action="InitialPage" class="btn  btn-outline-primary"> Back </a>
+        </div>
+    </div>
+
+</body>
+</html>

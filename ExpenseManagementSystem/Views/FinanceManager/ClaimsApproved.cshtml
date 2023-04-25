@@ -11,14 +11,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>Finance Mananger Lists</title>
 </head>
-<body style="overflow:hidden">
+<body>
 @*<p>
     <a asp-action="Create">Create New</a>
 </p>*@
-    <div style="padding-left:250px;padding-top:50px;color:#0033cc">
-    <h3> Finance Manager Lists </h3>
+<div >
+        <h3 style="padding-left:250px;padding-top:50px;color:#0000b3"> Finance Manager Approved  Lists </h3>
+        <br />
 </div>
-<br />
 <div style="padding-left:250px">
 
     <table class="table-bordered" style="width:100%">
@@ -149,66 +149,13 @@
                             @*  <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@
             </td>
         </tr>
-
-
-
-                    
 }
     </tbody>
 </table>
 <br />
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-                    <p style="text-align:justify;"> Click here to check the claims approved. </p>
-                    
-        </div>
-    </div>
-
-     <div class="col-md-3">
-        <div class="form-group">
-                    <a asp-action="ClaimsApproved" type="button" class="btn btn-outline-primary">  Claims Approved </a>
-                    <br />
-        </div>
-    </div>
+<div style="padding-left:800px">
+            <a asp-action="InitialPage" class="btn  btn-outline-primary"> Back </a>
 </div>
-
-
-        <div class="row" style="padding-top:10px">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <p style="text-align:justify;"> Click here to check the claims partially approved. </p>
-
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="form-group">
-                    <a asp-action="ClaimsPartialApproved" type="button" class="btn btn-outline-primary">  Claims Partially Approved </a>
-                    <br />
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row" style="padding-top:10px">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <p style="text-align:justify;"> Click here to check the claims rejected. </p>
-
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <a asp-action="ClaimsRejected" type="button" class="btn btn-outline-primary"> Claims Rejected </a>
-                    <br />
-                </div>
-            </div>
-        </div>
-
-       
         
 </div>
 

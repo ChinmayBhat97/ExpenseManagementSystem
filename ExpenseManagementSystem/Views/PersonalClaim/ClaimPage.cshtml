@@ -4,15 +4,40 @@
     ViewData["Title"] = "Index";
 }
 
-<h3 style="padding-left:250px">
+<body style="overflow:hidden;">
+
+
+
+
+
+<h3 style="padding-left:250px;padding-top:50px;color:#0000b3">
     Claims Page
 </h3>
-<p style="padding-left:250px">
-    <a asp-action="AddClaim">Create New Claim</a>
-</p>
 
-<p style="padding-left:250px">
-    <a asp-action="ClaimList">Claim List</a>
+
+<p style="padding-left:250px;padding-top:25px;text-align:justify;" >
+        As an Employee, can add new claims against the bill spent for official purposes. 
+        The Claim added here will be passed on to the Reporting Manager
+        and then to Finance Manager upon Approve by Reporting Manager. 
+        The amount will be reambursied only after the Approve by Finance Manager. 
+        If claim is Partial Aproved or Rejected in any stage,
+        Employee needs to recheck on the claim or connect with respective Manager.
+    </p>
+    <h6 style="padding-left:250px;color:#ff0000">To Add new Claim click on the button Create New Claim.</h6>
+    <p style="padding-left:900px">
+
+        <a asp-action="AddClaim" type="button" class="btn btn-outline-primary">Create New Claim</a>
+    </p>
+
+
+
+    <br />
+<p style="padding-left:250px;padding-top:25px;text-align:justify;">
+    As an Employee, can check the claims made in past and can check the status of the claim. The Claims can be edited and viewed.
+</p>
+<h6 style="padding-left:250px;color:#ff0000">To check your previous claims and their status click on Previous Claims List.</h6>
+<p style="padding-left:900px">
+    <a asp-action="ClaimList" type="button" class="btn btn-outline-primary">Previous Claims List</a>
 </p>
 @*<table class="table">
     <thead>
@@ -98,3 +123,4 @@
 }
     </tbody>
 </table>*@
+</body>

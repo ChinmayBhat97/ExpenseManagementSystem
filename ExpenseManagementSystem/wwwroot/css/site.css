@@ -61,7 +61,7 @@ body {
 .currency-code {
     position: absolute;
     left: 8px;
-    top: 10px;
+    top: 8px;
 }
 
 .text-currency {
@@ -74,3 +74,8 @@ input.form-control {
     padding-left: 25px;
 }
 
+.box {
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+}
