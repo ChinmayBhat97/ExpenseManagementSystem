@@ -1,19 +1,31 @@
-﻿@model IEnumerable<ExpenseManagementSystem.Models.PersonalClaim>
+﻿@model IEnumerable<PersonalClaim>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />*@
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<body style="overflow:hidden">
+
+
+
+
+
+
+<body style="overflow:hidden;background-color:#f5f5f0">
     <h3 style="padding-left:250px;padding-top:50px;color:#0000b3">
     Claims List
 </h3>
 <div style="padding-left:250px;padding-top:25px">
     <table class="table-bordered" style="width:70%">
-        <thead style="background-color:white;height:35px; text-align: center;font-size:17px">
+            <thead style="background-color:aliceblue;height:35px; text-align: center;font-size:17px">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.claimID)
+                   Claim ID
                 </th>
               @*  <th>
                     @Html.DisplayNameFor(model => model.claimantName)
@@ -29,13 +41,13 @@
                 @Html.DisplayNameFor(model => model.billingDate)
                 </th>*@
                 <th>
-                    @Html.DisplayNameFor(model => model.managerEmailID)
+                   Manager Email-ID
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.claimingDate)
+                   Claimed Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.stusID)
+                    Status
                 </th>
                 @* <th>
                 @Html.DisplayNameFor(model => model.ImageFile)
@@ -48,8 +60,8 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
+                <tr style="background-color:white">
+                        <td style="padding-left:40px">
                         @Html.DisplayFor(modelItem => item.claimID)
                     </td>
                   @*  <td>
@@ -65,10 +77,10 @@
                     @*  <td>
                 @Html.DisplayFor(modelItem => item.billingDate)
                 </td>*@
-                    <td>
+                        <td style="padding-left:30px">
                         @Html.DisplayFor(modelItem => item.managerEmailID)
                     </td>
-                    <td>
+                        <td style ="padding-left:20px">
                         @Html.DisplayFor(modelItem => item.claimingDate)
                     </td>
                     <td>
@@ -76,19 +88,19 @@
                    
                     @if(item.stusID==1)
                         {
-                            <h6>Applied</h6>
+                                <h6 style="padding-left:25px;padding-top:5px;color:#002db3">Applied</h6>
                         }
                         else if(item.stusID==2 && item.stusID==3)
                         {
-                            <h6>Approved</h6>
+                                <h6 style="padding-left:25px;padding-top:5px;color:#00cc00">Approved</h6>
                         }
                         else if (item.stusID==4 && item.stusID==5)
                         {
-                            <h6>Partial Approved</h6>
+                                <h6 style="padding-left:25px;padding-top:5px;color: #ffd11a">Partial Approved</h6>
                         }
                         else
                         {
-                            <h6>Rejected</h6>
+                                <h6 style="padding-left:25px;padding-top:5px;color:red">Rejected</h6>
                         }
                      </td>
                    
@@ -110,8 +122,29 @@
         @* <input type="submit" value="Save" class="btn btn-success" style="width:100px; margin:10px" />*@
             <a asp-action="ClaimPage" class="btn  btn-outline-primary" style="width:100px; margin:10px"> Back </a>
     </div>
-
+       
 
 </div>
-
+   
 </body>
+
+@*<div style="padding-left:920px;padding-top:20px;">
+
+    @Html.PagedListPager((IPagedList)Model, page =>Url.Action("ClaimList", new {page}),
+    new X.PagedList.Mvc.Core.PagedListRenderOptions{
+    //DisplayItemSliceAndTotal = true,
+    ContainerDivClasses = new[] {"navigation"},
+    LiElementClasses = new[] { "page-item"},
+    PageClasses = new[] {"page-link"},
+    })
+</div>
+
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('ul.pagination > li.disabled > a').addclass('page-link');
+        });
+    </script>
+    }*@

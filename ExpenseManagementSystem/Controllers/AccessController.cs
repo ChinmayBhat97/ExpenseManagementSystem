@@ -46,8 +46,12 @@ namespace ExpenseManagementSystem.Controllers
                 var checkUser = _context.Employees.Any(u => u.empEmailID==emailID);
                 var checkPWD = _context.Employees.Any(j => j.passWord==pwd);
                 var role = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.designation).SingleOrDefault();
+                var usrName = _context.Employees.Where(m => m.empEmailID==emailID).Select(n => n.empUserName).SingleOrDefault();
                 TempData["tagEmail-ID"] = emailID;
                 TempData["userEmail-ID"] = emailID;
+
+                TempData["userName"]=usrName;
+                ViewBag.UserRole= role;
 
                 if ((checkUser && checkPWD)==true)
                 {

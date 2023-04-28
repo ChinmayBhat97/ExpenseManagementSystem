@@ -27,6 +27,11 @@ namespace ExpenseManagementSystem.Controllers
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
 
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
                 return View();
             }
             catch (Exception ex) 
@@ -41,6 +46,8 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+                
+
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 return RedirectToAction("Login", "Access");
             }

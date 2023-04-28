@@ -22,9 +22,9 @@ body {
     margin: 0;
     padding: 5px;
     width: 235px;
-    background-color: #beebe7;
+    background-color: #99ffff;
     position: fixed;
-    height: 150%;
+    height: 200%;
     overflow: hidden;
     font-weight: 700;
 }
@@ -54,8 +54,7 @@ body {
         }
 
 .currency-wrap {
-    position: relative;
-    
+    position: relative; 
 }
 
 .currency-code {
@@ -76,6 +75,8 @@ input.form-control {
 
 .box {
     width: 300px;
-    height: 200px;
+    height: 300px;
     border: 1px solid black;
 }
+
+

@@ -12,7 +12,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ExpenseManagementSystem.Controllers
 {
-    [Authorize(Roles ="Manager")]
+    [Authorize(Roles = "Manager")]
     public class ManagersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -37,6 +37,12 @@ namespace ExpenseManagementSystem.Controllers
                 loggedEmail= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
 
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+
                 int status = 1;
                 var ListofClaims = await _context.PersonalClaims.Where(e => e.managerEmailID==loggedEmail && e.stusID==status).ToListAsync();
               
@@ -57,6 +63,12 @@ namespace ExpenseManagementSystem.Controllers
                 string loggedUser = string.Empty;
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
+
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
 
                 var viewClaimApplied = await _context.PersonalClaims.FirstOrDefaultAsync(m => m.claimID == id);
 
@@ -89,6 +101,12 @@ namespace ExpenseManagementSystem.Controllers
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
 
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+
                 var editClaim = await _context.PersonalClaims.FindAsync(id);
                 if (editClaim == null)
                 {
@@ -114,6 +132,12 @@ namespace ExpenseManagementSystem.Controllers
                 string loggedUser = string.Empty;
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
+
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
 
                 //  var updateClaim =  _context.Database.ExecuteSqlRaw("_SPClaimUpdateManagerFor {0},{1},{2}",id,remarkManager,stusID);
 
@@ -148,6 +172,10 @@ namespace ExpenseManagementSystem.Controllers
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
 
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
 
                 int status = 2;
                 var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
@@ -168,6 +196,10 @@ namespace ExpenseManagementSystem.Controllers
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
 
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
                 int status = 4;
                 var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
                 return View(claimLists);
@@ -185,6 +217,11 @@ namespace ExpenseManagementSystem.Controllers
                 string loggedUser = string.Empty;
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
 
                 int status = 6;
                 var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();

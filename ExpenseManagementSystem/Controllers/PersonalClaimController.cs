@@ -10,10 +10,15 @@ using ExpenseManagementSystem.Models;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using X.PagedList;
+using System.Collections.Generic;
+using System.Drawing.Printing;
+
 
 namespace ExpenseManagementSystem.Controllers
 {
-    [Authorize(Roles = "Finanace Manager, Manager, Intern,Engineer")]
+    [Authorize(Roles = "Finance Manager, Manager, Intern,Engineer")]
     public class PersonalClaimController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,7 +30,7 @@ namespace ExpenseManagementSystem.Controllers
             _context = context;
             _hostEnvironment=hostEnvironment;
         }
-        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
+        [Authorize(Roles = "Finance Manager, Manager, Intern, Engineer")]
         // Front Page
         public async Task<IActionResult> ClaimPage()
         {
@@ -34,6 +39,11 @@ namespace ExpenseManagementSystem.Controllers
                 string loggedUser = string.Empty;
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
 
                 var applicationDbContext = _context.PersonalClaims.Include(p => p.Department);
                 return View(await applicationDbContext.ToListAsync());
@@ -46,10 +56,19 @@ namespace ExpenseManagementSystem.Controllers
         }
 
 
-        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
+        [Authorize(Roles = "Finance Manager, Manager, Intern, Engineer")]
         // Add Personal Claim 
         public IActionResult AddClaim()
         {
+            string loggedUser = string.Empty;
+            ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+            TempData.Keep();
+
+            string userName = string.Empty;
+            ViewBag.userName= TempData["userName"].ToString();
+            TempData.Keep();
+
+
             try
             {
                 return View();
@@ -61,7 +80,7 @@ namespace ExpenseManagementSystem.Controllers
           
            
         }
-        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
+        [Authorize(Roles = "Finance Manager, Manager, Intern, Engineer")]
         // POST  Personal Claim 
         [HttpPost]
         public async Task<IActionResult> AddClaim(PersonalClaim personalClaim)
@@ -72,6 +91,11 @@ namespace ExpenseManagementSystem.Controllers
                 string loggedUser = string.Empty;
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
 
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(personalClaim.ImageFile.FileName);
@@ -102,19 +126,36 @@ namespace ExpenseManagementSystem.Controllers
           
         }
 
-        [Authorize(Roles = "Finanace Manager, Manager, Intern, Engineer")]
+        [Authorize(Roles = "Finance Manager, Manager, Intern, Engineer")]
         // GET PersonalClaim list
-        public async Task<IActionResult> ClaimList()
+        public IActionResult ClaimList(int? page)
         {
             try
             {
+
+                //Pagination
+                //var pageNumber = page ?? 1;
+                //int pageSize = 4;
+               // var onePageofUsers = _context.PersonalClaims.ToPagedList(pageNumber, pageSize);
+
+
                 string loggedEmail = string.Empty;
                  loggedEmail= TempData["userEmail-ID"].ToString();
-                TempData.Keep();
-              
-                var ListofClaims = await _context.PersonalClaims.Where(e =>e.claimantEmailID==loggedEmail).ToListAsync();
-               
+                 TempData.Keep();
 
+
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+                var ListofClaims =  _context.PersonalClaims.Where(e =>e.claimantEmailID==loggedEmail).ToList();
+
+                //ToPagedList(pageNumber, pageSize).
                 return View(ListofClaims);
             }
             catch (Exception ex)

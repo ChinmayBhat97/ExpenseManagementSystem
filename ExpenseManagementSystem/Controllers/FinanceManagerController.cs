@@ -14,7 +14,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ExpenseManagementSystem.Controllers
 {
-    [Authorize(Roles = "Finanace Manager")]
+    [Authorize(Roles = "Finance Manager")]
     public class FinanceManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -33,6 +33,12 @@ namespace ExpenseManagementSystem.Controllers
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
                 TempData.Keep();
 
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+
+
                 string status = "Approved by Managar";
                 var claimLists = await _context.PersonalClaims.Where(p => p.remarkManager==status).ToListAsync();
                 return View(claimLists);
@@ -50,6 +56,15 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
                 var viewClaimApplied = await _context.PersonalClaims.FirstOrDefaultAsync(m => m.claimID == id);
 
 
@@ -75,6 +90,14 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
                 var updateClaim = await _context.PersonalClaims.FindAsync(id);
                 if (updateClaim == null)
                 {
@@ -97,6 +120,14 @@ namespace ExpenseManagementSystem.Controllers
 
             try
             {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
                 //  var updateClaim =  _context.Database.ExecuteSqlRaw("_SPClaimUpdateManagerFor {0},{1},{2}",id,remarkManager,stusID);
 
                 SqlConnection con = new SqlConnection("Server=DESKTOP-0F310TS\\SQLEXPRESS ; Initial Catalog = ExpensesManagementSystem; trusted_connection=true; MultipleActiveResultSets=True");
@@ -126,6 +157,15 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+
                 // string status = "Approved by Finance Manager";
                 int status = 3;
                 var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
@@ -142,6 +182,15 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+
                 int status = 5;
                 var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
                 return View(claimLists);
@@ -156,6 +205,16 @@ namespace ExpenseManagementSystem.Controllers
         {
             try
             {
+                string loggedUser = string.Empty;
+                ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                TempData.Keep();
+
+
+                string userName = string.Empty;
+                ViewBag.userName= TempData["userName"].ToString();
+                TempData.Keep();
+
+
                 int status = 7;
                 var claimLists = await _context.PersonalClaims.Where(p => p.stusID==status).ToListAsync();
                 if (claimLists.Count()==0)
