@@ -1,10 +1,7 @@
-﻿@model IEnumerable<PersonalClaim>
-@using X.PagedList;
-@using X.PagedList.Mvc.Core;
+﻿@model cloudscribe.Pagination.Models.PagedResult<PersonalClaim>
 
-@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+
+
 
 @{
     ViewData["Title"] = "Index";
@@ -58,7 +55,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Data)
             {
                 <tr style="background-color:white">
                         <td style="padding-left:40px">
@@ -123,28 +120,24 @@
             <a asp-action="ClaimPage" class="btn  btn-outline-primary" style="width:100px; margin:10px"> Back </a>
     </div>
        
+    <div style="padding-left:600px;padding-top:50px">
+
+            <cs-pager cs-paging-pagenumber=Model.PageNumber
+                      cs-paging-totalitems=Model.TotalItems
+                      cs-paging-pagesize=Model.PageSize
+                      cs-pagenumber-param="pagenumber"
+                      asp-controller="PersonalClaim" asp-action="ClaimList"
+                      cs-pager-li-current-class="page-item active"
+                      cs-pager-li-other-class="page-item"
+                      cs-pager-li-non-active-class="page-item disabled"
+                      cs-pager-link-current-class="page-link"
+                      cs-pager-link-other-class="page-link">
+
+            </cs-pager>
+    </div>
+   
 
 </div>
    
 </body>
 
-@*<div style="padding-left:920px;padding-top:20px;">
-
-    @Html.PagedListPager((IPagedList)Model, page =>Url.Action("ClaimList", new {page}),
-    new X.PagedList.Mvc.Core.PagedListRenderOptions{
-    //DisplayItemSliceAndTotal = true,
-    ContainerDivClasses = new[] {"navigation"},
-    LiElementClasses = new[] { "page-item"},
-    PageClasses = new[] {"page-link"},
-    })
-</div>
-
-
-@section Scripts
-    {
-    <script>
-        $(document).ready(function () {
-            $('ul.pagination > li.disabled > a').addclass('page-link');
-        });
-    </script>
-    }*@

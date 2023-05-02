@@ -11,9 +11,10 @@ using System.Text.Unicode;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using X.PagedList;
+
 using System.Collections.Generic;
 using System.Drawing.Printing;
+using cloudscribe.Pagination.Models;
 
 
 namespace ExpenseManagementSystem.Controllers
@@ -128,15 +129,12 @@ namespace ExpenseManagementSystem.Controllers
 
         [Authorize(Roles = "Finance Manager, Manager, Intern, Engineer")]
         // GET PersonalClaim list
-        public IActionResult ClaimList(int? page)
+        public IActionResult ClaimList(int pageNumber=1, int pageSize=5)
         {
             try
             {
 
-                //Pagination
-                //var pageNumber = page ?? 1;
-                //int pageSize = 4;
-               // var onePageofUsers = _context.PersonalClaims.ToPagedList(pageNumber, pageSize);
+               
 
 
                 string loggedEmail = string.Empty;
@@ -153,10 +151,22 @@ namespace ExpenseManagementSystem.Controllers
                 ViewBag.userName= TempData["userName"].ToString();
                 TempData.Keep();
 
-                var ListofClaims =  _context.PersonalClaims.Where(e =>e.claimantEmailID==loggedEmail).ToList();
 
-                //ToPagedList(pageNumber, pageSize).
-                return View(ListofClaims);
+                int ExcludeRecords = (pageSize* pageNumber)-pageSize;
+
+
+                // var ListofClaims = _context.PersonalClaims.Where(e => e.claimantEmailID==loggedEmail).Skip(ExcludeRecords).Take(pageSize).ToList();
+
+                var result = new PagedResult<PersonalClaim>
+                    {
+                        Data = _context.PersonalClaims.AsNoTracking().Where(e => e.claimantEmailID==loggedEmail).ToList(),
+                        TotalItems= _context.PersonalClaims.Count(),
+                        PageNumber =pageNumber,
+                        PageSize = pageSize
+                    };
+
+                return View(result);
+                // return View(ListofClaims);
             }
             catch (Exception ex)
             {
