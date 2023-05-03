@@ -15,8 +15,9 @@
 @*<p>
     <a asp-action="Create">Create New</a>
 </p>*@
-    <div style="padding-left:250px;padding-top:50px;color:#0033cc">
-    <h3> Finance Manager Lists </h3>
+    <div style="padding-left:250px;padding-top:10px;color:#0000b3">
+        <h4> <u>Finance Manager Lists </u>  </h4>
+       
 </div>
 <br />
 <div style="padding-left:250px">
@@ -75,13 +76,13 @@
             <tbody style="background-color:white;height:25px; text-align:left;font-size:17px;padding-left:15px">
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td style="padding-left:15px;">
                 @Html.DisplayFor(modelItem => item.claimantName)
             </td>
-            <td>
+                        <td style="padding-left:15px;">
                 @Html.DisplayFor(modelItem => item.claimantEmailID)
             </td>
-            <td>
+                        <td style="padding-left:15px;">
                             @*@Html.DisplayFor(modelItem => item.DeptID)*@
                             @if (item.DeptID==1)
                             {
@@ -122,7 +123,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.billingDate)
             </td>*@
-            <td>
+                        <td style="padding-left:15px;">
                 @Html.DisplayFor(modelItem => item.claimingDate)
             </td>
            @* <td>
@@ -143,7 +144,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.remarkFinanace)
             </td>*@
-            <td>
+                        <td style="padding-left:25px;">
               @*  <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |*@
                             <a asp-action="ViewClaim" asp-route-id="@item.claimID"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
                             @*  <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@
@@ -160,7 +161,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-                    <p style="text-align:justify;"> Click here to check the claims approved. </p>
+                    <p style="text-align:justify;"> <b>  Click here to check the claims approved. </b> </p>
                     
         </div>
     </div>
@@ -168,16 +169,16 @@
      <div class="col-md-3">
         <div class="form-group">
                     <a asp-action="ClaimsApproved" type="button" class="btn btn-outline-primary">  Claims Approved </a>
-                    <br />
+                
         </div>
     </div>
 </div>
 
-
-        <div class="row" style="padding-top:10px">
+        <hr style="height:1px;width:80%;text-align:left;margin-left:0;background-color:darkblue;color:darkblue;">
+        <div class="row" style="padding-top:5px">
             <div class="col-md-6">
                 <div class="form-group">
-                    <p style="text-align:justify;"> Click here to check the claims partially approved. </p>
+                    <p style="text-align:justify;"> <b>  Click here to check the claims partially approved.</b> </p>
 
                 </div>
             </div>
@@ -185,17 +186,17 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <a asp-action="ClaimsPartialApproved" type="button" class="btn btn-outline-primary">  Claims Partially Approved </a>
-                    <br />
+                   
                 </div>
             </div>
         </div>
 
+        <hr style="height:1px;width:80%;text-align:left;margin-left:0;background-color:darkblue;color:darkblue;">
 
-
-        <div class="row" style="padding-top:10px">
+        <div class="row" style="padding-top:5px">
             <div class="col-md-6">
                 <div class="form-group">
-                    <p style="text-align:justify;"> Click here to check the claims rejected. </p>
+                    <p style="text-align:justify;"> <b>  Click here to check the claims rejected. </b> </p>
 
                 </div>
             </div>
@@ -203,7 +204,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <a asp-action="ClaimsRejected" type="button" class="btn btn-outline-primary"> Claims Rejected </a>
-                    <br />
+                   
                 </div>
             </div>
         </div>

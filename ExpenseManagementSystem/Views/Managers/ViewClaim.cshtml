@@ -8,10 +8,10 @@
 
 <html>
 
-<body style="overflow:auto">
+<body style="overflow:hidden">
 
 <div style="padding-left:250px;">
-    <h4>Applied Claim Details</h4>
+        <h4 style="padding-top:10px;color:#0000b3"> <u> Applied Claim Details</u> </h4>
     <br />
         <div class="col-md-12">
 
@@ -73,17 +73,17 @@
                             </div>
                         </div>
 
-
-                        @*<div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <b>Claimant Email-ID: </b> @Html.DisplayFor(model => model.DeptID)
+                                <b> Claimed Amount: ₹   </b>  @Html.DisplayFor(model => model.claimAmount)
                             </div>
-                        </div>*@
+                        </div>
+                       
                     </div>
 
                     <br />
 
-                    <div class="row">
+                   @* <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <b>Bank Account Number: </b>  @Html.DisplayFor(model => model.accuntNumber)
@@ -103,7 +103,7 @@
                         </div>
                     </div>
 
-                    <br />
+                    <br />*@
 
                    
 
@@ -120,9 +120,38 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="padding-left:85px">
                             <div class="form-group">
-                                <b> Status: </b> @Html.DisplayFor(model => model.stusID)
+                                 @*@Html.DisplayFor(model => model.stusID)*@
+                        <b> Status: </b>  @if (Model.stusID==1)
+                                            {
+                                              <h6 style="color:#0000b3"> Applied</h6>
+                                            }
+                                            else if (Model.stusID==2)
+                                            {
+                                              <h6 style="color:#009900">Approved by Managar </h6>
+                                            }
+                                            else if (Model.stusID==3)
+                                            {
+                                              <h6 style="color:#009900">Approved by Finance Manager </h6>
+                                            }
+                                            else if (Model.stusID==4)
+                                            {
+                                             <h6 style="color:#e6b800"> Partial approved by  Manager </h6>
+                                            }
+                                             else if (Model.stusID==5)
+                                            {
+                                             <h6 style="color:#e6b800"> Partial approved by Finance Manager </h6>
+                                            }
+                                            else if (Model.stusID==6)
+                                            {
+                                               <h6 style="color:red"> Rejected by  Manager </h6>
+                                            }
+                                            else 
+                                            {
+                                              <h6 style="color:red"> Rejected by Finance Manager </h6>
+                                            }
+
                             </div>
                         </div>
                     </div>
@@ -139,29 +168,6 @@
                     </div>
 
                     <br />
-
-                  @*  <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <b>Status: </b>  @Html.DisplayFor(model => model.ClaimStatus)
-                            </div>
-                        </div>
-                        for image
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <b>IFSC: </b> @Html.DisplayFor(model => model.ImageFile)
-                            </div>
-                        </div>
-
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <b> Amount:  </b>  @Html.DisplayFor(model => model.claimAmount)
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <br />*@
 
 
 
@@ -183,28 +189,14 @@
                         <b> Image Name: </b>  @Html.DisplayFor(model => model.ClaimStatus)
                     </div>
                 </div>*@
-
             </div>
-
-            <br />
-
-
-           @* <div class="row">
-                <div class="col-md-12">
-                            <div class="form-group">
-                                <b>Claim Description: </b>  @Html.DisplayFor(model => model.description)
-                            </div>
-                </div>
+            <div style="padding-left:600px;">
+                <a asp-action="FrontPage" class="btn btn-outline-primary">Back</a>
+                <a asp-action="updateClaimApplied" asp-route-id="@Model?.claimID" class="btn btn-outline-success">Update</a>
             </div>
-
-            <br />*@
         </div>
-    <br />
-</div>
-    <div style ="padding-left:850px;">
-        <a asp-action="FrontPage" class="btn btn-primary">Back to List</a>
-        <a asp-action="updateClaimApplied" asp-route-id="@Model?.claimID" class="btn btn-success">Update</a>
-      
-   </div>
+
+    </div>
+    
 </body>
 </html>

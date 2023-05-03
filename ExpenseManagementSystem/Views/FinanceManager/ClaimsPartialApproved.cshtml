@@ -81,13 +81,13 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td style="padding-left:15px;">
                             @Html.DisplayFor(modelItem => item.claimantName)
                         </td>
-                        <td>
+                        <td style="padding-left:15px;">
                             @Html.DisplayFor(modelItem => item.claimantEmailID)
                         </td>
-                        <td>
+                        <td style="padding-left:15px;">
                             @*@Html.DisplayFor(modelItem => item.DeptID)*@
                             @if (item.DeptID==1)
                             {
@@ -128,7 +128,7 @@
                     <td>
                     @Html.DisplayFor(modelItem => item.billingDate)
                     </td>*@
-                        <td>
+                        <td style="padding-left:15px;">
                             @Html.DisplayFor(modelItem => item.claimingDate)
                         </td>
                         @* <td>
@@ -149,7 +149,7 @@
                     <td>
                     @Html.DisplayFor(modelItem => item.remarkFinanace)
                     </td>*@
-                        <td>
+                        <td style="padding-left:15px;">
                             @*  <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a> |*@
                             <a asp-action="ViewClaim" asp-route-id="@item.claimID"> <i class="fa fa-eye" aria-hidden="true"></i> </a>
                             @*  <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@

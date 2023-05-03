@@ -38,9 +38,10 @@ namespace ExpenseManagementSystem.Controllers
                 TempData.Keep();
 
 
-
-                string status = "Approved by Managar";
-                var claimLists = await _context.PersonalClaims.Where(p => p.remarkManager==status).ToListAsync();
+                //p.remarkManager==statusManager &&
+                //string statusManager = "Approved by Managar";
+                string statusFinManager = "Yet to Update";
+                var claimLists = await _context.PersonalClaims.Where(p =>  p.remarkFinanace==statusFinManager).ToListAsync();
                 return View(claimLists);
             }
             catch(Exception ex)

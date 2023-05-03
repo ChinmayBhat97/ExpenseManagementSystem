@@ -22,7 +22,7 @@ body {
     margin: 0;
     padding: 5px;
     width: 235px;
-    background-color: #99ffff;
+    background-color: #ccffff;
     position: fixed;
     height: 200%;
     overflow: hidden;
@@ -46,11 +46,12 @@ body {
         /* Links on mouse-over */
         .sidebar a:hover:not(.active) {
             background-color: #102578;
-            color: white;
-            border-top-left-radius: 9px;
-            border-top-right-radius: 9px;
-            border-bottom-left-radius: 9px;
-            border-bottom-right-radius: 9px;
+            color: #ffff33;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
+            /*#102578*/
         }
 
 .currency-wrap {

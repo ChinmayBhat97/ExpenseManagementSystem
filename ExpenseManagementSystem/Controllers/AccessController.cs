@@ -66,7 +66,7 @@ namespace ExpenseManagementSystem.Controllers
 
                     AuthenticationProperties properties = new AuthenticationProperties()
                     {
-                        AllowRefresh= true,
+                        AllowRefresh= false,
                         IsPersistent =employee.keepLoggedIn=false
                     };
 

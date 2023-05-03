@@ -4,10 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
+<body style="overflow:hidden;background-color: #f2ffe6">
+    <h4 style="padding-left:300px;padding-top:25px;color:#0000b3"><u> New Claim </u> </h4>
 
-<h4 style="padding-left:250px">PersonalClaim</h4>
-
-<div class="row" style="padding-left:250px;padding-top:25px">
+<div class="row" style="padding-left:300px;padding-top:25px">
     <div class="col-md-12"> 
         <form asp-action="AddClaim" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -34,7 +34,7 @@
                 </div>    
             </div>
            
-            <div class="row">
+            <div class="row" style="padding-top:5px">
                 <div class="col-md-5">
                     <div class="form-group">
                         <b>
@@ -57,7 +57,7 @@
             </div>
            
 
-            <div class="row">
+            <div class="row" style="padding-top:5px">
                 <div class="col-md-3">
                     <div class="form-group">
                         <b> <label asp-for="billingDate" class="control-label"></label><span style="color:red;">*</span></b>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3" style="padding-top:5px">
                     <div class="form-group">
                         <b> <label asp-for="DeptID" class="control-label"></label><span style="color:red;">*</span> </b>
                         <select asp-for="DeptID" class="form-control" >
@@ -99,7 +99,7 @@
                 </div>
             </div>
          
-            <div class="row">
+            <div class="row" style="padding-top:5px">
                 <div class="col-md-4">
                     <div class="form-group">
                         <b>
@@ -127,7 +127,7 @@
                                 <label asp-for="claimAmount" class="control-label"></label><span style="color:red;">*</span>
                             </b>
                         <div class="currency-wrap">
-                            <input asp-for="claimAmount" class="form-control" />
+                            <input asp-for="claimAmount" class="form-control" min="1" max="99999" required/>
                             <span class="currency-code"> <i class="fa fa-inr" aria-hidden="true" style="padding-bottom:20px"></i> </span>
                         </div>   
                         <span asp-validation-for="claimAmount" class="text-danger"></span>
@@ -137,7 +137,7 @@
 
 
 
-            <div class="row">
+            <div class="row" style="padding-top:5px">
                 <div class="col-md-10">
                     <div class="form-group">
                         <b>
@@ -152,15 +152,15 @@
 
             <br />
 
-            <div class="d-flex flex-row-reverse bd-highlight" style="padding-right:25px">
-                <input type="submit" value="Save" class="btn btn-outline-success" style="width:100px; margin:10px" />
+            <div class="d-flex flex-row-reverse bd-highlight" style="padding-right:130px">
+                <input type="submit" value="Submit" class="btn btn-outline-success" style="width:100px; margin:10px" />
                 <a asp-action="ClaimPage" class="btn  btn-outline-primary" style="width:100px; margin:10px"> Back </a>
             </div>
 
         </form>
     </div>
 </div>
-
+</body>
 @*<div style ="padding-left:250px">
     <a asp-action="ClaimPage">Back to List</a>
 </div>*@
