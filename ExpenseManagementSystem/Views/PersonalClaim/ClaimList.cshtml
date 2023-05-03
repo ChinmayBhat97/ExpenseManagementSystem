@@ -40,9 +40,9 @@
                 @* <th>
                 @Html.DisplayNameFor(model => model.ImageFile)
                 </th>*@
-               @* <th>
+                <th>
                     Actions
-                </th>*@
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -91,7 +91,19 @@
                                 <h6 style="padding-left:25px;padding-top:5px;color:red">Rejected</h6>
                         }
                      </td>
-                   
+                      <td>
+                            @if (item.stusID==6 && item.stusID==5)
+                            {
+                                <a asp-action="Details" asp-route-id="@item.claimID">Details</a>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            }
+                            else
+                            {
+                                <a asp-action="Details" asp-route-id="@item.claimID">Details</a>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            }
+
+                      </td>  
                            @* <a asp-action="Edit" asp-route-id="@item.claimID">Edit</a>  <i class="fa fa-pencil" aria-hidden="true"></i>
                             <a asp-action="Details" asp-route-id="@item.claimID">Details</a> <i class="fa fa-eye" aria-hidden="true"></i>*@
 @*                        <a asp-action="Delete" asp-route-id="@item.claimID">Delete</a>*@

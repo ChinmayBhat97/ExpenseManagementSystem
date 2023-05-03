@@ -91,12 +91,16 @@ namespace ExpenseManagementSystem.Controllers
 
                 string loggedUser = string.Empty;
                 ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                loggedUser = ViewBag.loggedUser;
                 TempData.Keep();
 
                 string userName = string.Empty;
                 ViewBag.userName= TempData["userName"].ToString();
                 TempData.Keep();
 
+               
+
+                var NameClaimant = _context.Employees.Where(e => e.empEmailID==loggedUser).Select(e => e.empName).SingleOrDefault();
 
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(personalClaim.ImageFile.FileName);
@@ -108,6 +112,10 @@ namespace ExpenseManagementSystem.Controllers
                     await personalClaim.ImageFile.CopyToAsync(fileStream);
                 }
 
+               
+
+                personalClaim.claimantName= NameClaimant;
+                personalClaim.claimantEmailID=loggedUser;
                 personalClaim.stusID=1;
                 personalClaim.claimingDate=DateTime.Now.Date;
                 personalClaim.remarkManager= "Yet to Update";
@@ -175,6 +183,77 @@ namespace ExpenseManagementSystem.Controllers
 
         }
 
+
+        // GET: PersonalClaim/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+
+            try
+            {
+                if (id == null || _context.PersonalClaims == null)
+                {
+                    return NotFound();
+                }
+
+                var personalClaim = await _context.PersonalClaims.FindAsync(id);
+                if (personalClaim == null)
+                {
+                    return NotFound();
+                }
+                // ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
+                return View(personalClaim);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+
+           
+        }
+
+        // POST: PersonalClaim/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,  PersonalClaim personalClaim)
+        {
+           
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    string loggedUser = string.Empty;
+                    ViewBag.loggedUser= TempData["userEmail-ID"].ToString();
+                    TempData.Keep();
+
+                    string userName = string.Empty;
+                    ViewBag.userName= TempData["userName"].ToString();
+                    TempData.Keep();
+
+
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(personalClaim.ImageFile.FileName);
+                    string extension = Path.GetExtension(personalClaim.ImageFile.FileName);
+                    personalClaim.ImageName=fileName = fileName + DateTime.Now.ToString("yymmddssff")+ extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await personalClaim.ImageFile.CopyToAsync(fileStream);
+                    }
+
+
+                    _context.Update(personalClaim);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+               // return RedirectToAction(nameof(Index));
+            }
+         //   ViewData["DeptID"] = new SelectList(_context.Departments, "Id", "Id", personalClaim.DeptID);
+            return View(personalClaim);
+        }
     }
 }
 

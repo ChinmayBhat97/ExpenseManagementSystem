@@ -13,63 +13,149 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="claimID" />
-            <div class="form-group">
-                <label asp-for="claimantName" class="control-label"></label>
-                <input asp-for="claimantName" class="form-control" />
-                <span asp-validation-for="claimantName" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="claimantName" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="claimantName" class="form-control" />
+                        <span asp-validation-for="claimantName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="claimantEmailID" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="claimantEmailID" class="form-control" />
+                        <span asp-validation-for="claimantEmailID" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="claimantEmailID" class="control-label"></label>
-                <input asp-for="claimantEmailID" class="form-control" />
-                <span asp-validation-for="claimantEmailID" class="text-danger"></span>
+
+            <div class="row" style="padding-top:5px">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="managerName" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="managerName" class="form-control" />
+                        <span asp-validation-for="managerName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="managerEmailID" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="managerEmailID" class="form-control" />
+                        <span asp-validation-for="managerEmailID" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DeptID" class="control-label"></label>
-                <select asp-for="DeptID" class="form-control" asp-items="ViewBag.DeptID"></select>
-                <span asp-validation-for="DeptID" class="text-danger"></span>
+
+
+            <div class="row" style="padding-top:5px">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <b> <label asp-for="billingDate" class="control-label"></label><span style="color:red;">*</span></b>
+                        <input asp-for="billingDate" type="date" class="form-control" />
+                        <span asp-validation-for="billingDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3" style="padding-top:5px">
+                    <div class="form-group">
+                        <b> <label asp-for="DeptID" class="control-label"></label><span style="color:red;">*</span> </b>
+                        <select asp-for="DeptID" class="form-control">
+                            <option value=""> - -Select - - </option>
+                            <option value="1">Accounts</option>
+                            <option value="2">Financial Services</option>
+                            <option value="3">Enablement Services</option>
+                            <option value="4">Human Resources</option>
+                            <option value="5">Software Services</option>
+                        </select>
+                        @* <select id="Select1" asp-items="@(new SelectList(Model.Department,"Id","departmentName"))"> </select>*@
+
+                        <span asp-validation-for="DeptID" class="text-danger">  </span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    @* <div class="form-group">
+                    <label asp-for="claimingDate" class="control-label"></label>
+                    <input asp-for="claimingDate" class="form-control" />
+                    <span asp-validation-for="claimingDate" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="ImageFile" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="ImageFile" accept="image/*" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="managerName" class="control-label"></label>
-                <input asp-for="managerName" class="form-control" />
-                <span asp-validation-for="managerName" class="text-danger"></span>
+
+            <div class="row" style="padding-top:5px">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="accuntNumber" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="accuntNumber" class="form-control" />
+                        <span asp-validation-for="accuntNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="IFSC" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <input asp-for="IFSC" class="form-control" />
+                        <span asp-validation-for="IFSC" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="claimAmount" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+                        <div class="currency-wrap">
+                            <input asp-for="claimAmount" class="form-control" min="1" max="99999" required />
+                            <span class="currency-code"> <i class="fa fa-inr" aria-hidden="true" style="padding-bottom:20px"></i> </span>
+                        </div>
+                        <span asp-validation-for="claimAmount" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="managerEmailID" class="control-label"></label>
-                <input asp-for="managerEmailID" class="form-control" />
-                <span asp-validation-for="managerEmailID" class="text-danger"></span>
+
+
+
+            <div class="row" style="padding-top:5px">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <b>
+                            <label asp-for="description" class="control-label"></label><span style="color:red;">*</span>
+                        </b>
+
+                        <input asp-for="description" class="form-control" />
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="accuntNumber" class="control-label"></label>
-                <input asp-for="accuntNumber" class="form-control" />
-                <span asp-validation-for="accuntNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IFSC" class="control-label"></label>
-                <input asp-for="IFSC" class="form-control" />
-                <span asp-validation-for="IFSC" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="description" class="control-label"></label>
-                <input asp-for="description" class="form-control" />
-                <span asp-validation-for="description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="billingDate" class="control-label"></label>
-                <input asp-for="billingDate" class="form-control" />
-                <span asp-validation-for="billingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="claimingDate" class="control-label"></label>
-                <input asp-for="claimingDate" class="form-control" />
-                <span asp-validation-for="claimingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
-                <input asp-for="ImageFile" class="form-control" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <br />
+
+            <div class="d-flex flex-row-reverse bd-highlight" style="padding-right:130px">
+                <input type="submit" value="Submit" class="btn btn-outline-success" style="width:100px; margin:10px" />
+                <a asp-action="ClaimPage" class="btn  btn-outline-primary" style="width:100px; margin:10px"> Back </a>
             </div>
         </form>
     </div>

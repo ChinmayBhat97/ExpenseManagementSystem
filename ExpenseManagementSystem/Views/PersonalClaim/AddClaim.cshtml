@@ -12,7 +12,7 @@
         <form asp-action="AddClaim" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="row">
+          @*  <div class="row">
                   <div class="col-md-5">
                     <div class="form-group">
                         <b>
@@ -32,7 +32,7 @@
                         <span asp-validation-for="claimantEmailID" class="text-danger"></span>
                     </div>
                 </div>    
-            </div>
+            </div>*@
            
             <div class="row" style="padding-top:5px">
                 <div class="col-md-5">
@@ -57,7 +57,7 @@
             </div>
            
 
-            <div class="row" style="padding-top:5px">
+            <div class="row" style="padding-top:8px">
                 <div class="col-md-3">
                     <div class="form-group">
                         <b> <label asp-for="billingDate" class="control-label"></label><span style="color:red;">*</span></b>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" style="padding-top:10px;">
                     @* <div class="form-group">
                     <label asp-for="claimingDate" class="control-label"></label>
                     <input asp-for="claimingDate" class="form-control" />
@@ -99,7 +99,7 @@
                 </div>
             </div>
          
-            <div class="row" style="padding-top:5px">
+            <div class="row" style="padding-top:8px">
                 <div class="col-md-4">
                     <div class="form-group">
                         <b>
@@ -137,7 +137,7 @@
 
 
 
-            <div class="row" style="padding-top:5px">
+            <div class="row" style="padding-top:8px">
                 <div class="col-md-10">
                     <div class="form-group">
                         <b>
