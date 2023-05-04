@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ExpenseManagementSystem.Models.ClaimStatus">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\ClaimStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExpenseManagementSystem.Models.Department">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Department.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExpenseManagementSystem.Models.Employee">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABQAAAAoAAACAAAAIAAQCEAAAACAAQAAAAYAACAA=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExpenseManagementSystem.Models.Gender">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Gender.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExpenseManagementSystem.Models.PersonalClaim">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAgAAQAAAAAAAIgAAAAwAEEEADBBAAAAIEACAEAA=</HashCode>
+      <FileName>Models\PersonalClaim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

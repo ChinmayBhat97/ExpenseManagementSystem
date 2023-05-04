@@ -49,7 +49,7 @@
             @foreach (var item in Model.Data)
             {
                 <tr style="background-color:white">
-                        <td style="padding-left:40px">
+                        <td style="padding-left:25px">
                         @Html.DisplayFor(modelItem => item.claimID)
                     </td>
                   @*  <td>
@@ -76,22 +76,22 @@
                    
                     @if(item.stusID==1)
                         {
-                                <h6 style="padding-left:25px;padding-top:5px;color:#002db3">Applied</h6>
+                                <h6 style="padding-left:15px;padding-top:5px;color:#002db3">Applied</h6>
                         }
                         else if(item.stusID==2 && item.stusID==3)
                         {
-                                <h6 style="padding-left:25px;padding-top:5px;color:#00cc00">Approved</h6>
+                                <h6 style="padding-left:15px;padding-top:5px;color:#00cc00">Approved</h6>
                         }
                         else if (item.stusID==4 && item.stusID==5)
                         {
-                                <h6 style="padding-left:25px;padding-top:5px;color: #ffd11a">Partial Approved</h6>
+                                <h6 style="padding-left:15px;padding-top:5px;color: #ffd11a">Partial Approved</h6>
                         }
                         else
                         {
-                                <h6 style="padding-left:25px;padding-top:5px;color:red">Rejected</h6>
+                                <h6 style="padding-left:15px;padding-top:5px;color:red">Rejected</h6>
                         }
                      </td>
-                      <td>
+                      <td style="padding-left:10px;">
                             @if (item.stusID==6 && item.stusID==5)
                             {
                                 <a asp-action="Details" asp-route-id="@item.claimID">Details</a>

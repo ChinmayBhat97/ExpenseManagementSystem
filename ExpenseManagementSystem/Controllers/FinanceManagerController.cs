@@ -40,8 +40,8 @@ namespace ExpenseManagementSystem.Controllers
 
                 //p.remarkManager==statusManager &&
                 //string statusManager = "Approved by Managar";
-                string statusFinManager = "Yet to Update";
-                var claimLists = await _context.PersonalClaims.Where(p =>  p.remarkFinanace==statusFinManager).ToListAsync();
+                int statusManager = 2;
+                var claimLists = await _context.PersonalClaims.Where(p =>  p.stusID==statusManager).ToListAsync();
                 return View(claimLists);
             }
             catch(Exception ex)
